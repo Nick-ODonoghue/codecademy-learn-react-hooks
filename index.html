@@ -23,7 +23,227 @@
         course</a>
     </p>
 
-    <h2></h2>
+    <h2>The State Hook</h2>
+
+    <section>
+      <h3>Why Use Hooks</h3>
+      <ul>
+        <li>React Hooks are functions that allow us to manage state and handle side effects in function components.</li>
+        <li>They provide a way to add state and lifecycle functionalities to function components, making them more
+          powerful and flexible.</li>
+        <li>Using Hooks, we can manage the internal state of components directly within the function body.</li>
+        <li>Hooks allow us to declare how our user interface should look based on the state.</li>
+        <li>Some of the built-in Hooks provided by React include useState(), useEffect(), useContext(), useReducer(),
+          and useRef().</li>
+        <li>useState() allows us to add and manage state in function components.</li>
+        <li>useEffect() enables us to handle side effects, such as fetching data or subscribing to events, after the
+          component has rendered.</li>
+        <li>useContext() allows us to access and use context within a function component.</li>
+        <li>useReducer() provides a way to manage state using a reducer function similar to how it's done in Redux.</li>
+        <li>useRef() gives us a mutable ref object that persists across re-renders and allows us to access and modify
+          DOM elements or other values.</li>
+        <li>By using Hooks, we can write cleaner and more concise code and take advantage of the benefits of function
+          components while still having access to state and side effects.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Update Function Component State</h3>
+      <ul>
+        <li>The State Hook is commonly used for building React components.</li>
+        <img src="./assets/images/importUseState.jpg" alt="import useState">
+        <li>To use the State Hook, we import it from the React library using object destructuring.</li>
+        <li>When useState() is called, it returns an array with two values: the current state and a state setter
+          function.</li>
+        <li>The current state represents the current value of the state, while the state setter function is used to
+          update the state's value.</li>
+        <img src="assets/images/destructuringUseState.jpg" alt="destructuring useState">
+        <li>We can track the current state and modify it by assigning the array values to local variables using array
+          destructuring.</li>
+        <li>In a function component, we can use the State Hook to manage state.</li>
+        <img src="assets/images/stateHookManagement.jpg" alt="state hook management">
+        <li>The example component "Toggle" demonstrates the usage of the State Hook.</li>
+        <li>The state setter function, setToggle(), is called by onClick event listeners to update the value of the
+          state.</li>
+        <li>By calling the state setter function with the next state value as an argument, we can update the state and
+          trigger a re-render of the component.</li>
+        <li>useState() allows React to keep track of the current state value from one render to the next.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Initialize State</h3>
+      <ul>
+        <li>The State Hook in React allows us to manage the value of any primitive data type or data collections like
+          arrays and objects.</li>
+        <li>We can initialize state by calling the useState() function and passing the initial value as an argument.
+        </li>
+        <img src="./assets/images/useState.jpg" alt="useState">
+        <li>The ToggleLoading() function component in the example uses a boolean data type for the state variable
+          "isLoading" to represent whether data is loading or not.</li>
+        <li>The state setter function, setIsLoading(), is used to update the value of the state variable.</li>
+        <img src="./assets/images/useStateInitializer.jpg" alt="useState initializer">
+        <li>To start the component with isLoading set to true, we can pass the initial value as true: const [isLoading,
+          setIsLoading] = useState(true);</li>
+        <li>The useState() function has three effects on the component</li>
+        <li>During the first render, the initial state argument is used.</li>
+        <li>When the state setter is called, React ignores the initial state argument and uses the new value.</li>
+        <li>When the component re-renders for any other reason, React continues to use the same value from the previous
+          render.</li>
+        <li>If we don't pass an initial value to useState(), the current value of the state during the first render will
+          be undefined. It's preferable to explicitly initialize the state, and if the value is not available during the
+          first render, we can pass null instead of leaving it undefined.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Use State Setter Outside of JSX</h3>
+      <ul>
+        <li>We can use the State Hook to manage the changing value of a string in a text input field.</li>
+        <img src="./assets/images/stateSetter.jpg" alt="state setter">
+        <li>We use array destructuring to create a local state variable (e.g., email) and a local setter function (e.g.,
+          setEmail) using the useState() function.</li>
+        <li>The email variable holds the current state value, and the setEmail function is used to update the value.
+        </li>
+        <li>We define an event handler function (e.g., handleChange) that is called when the onChange event is triggered
+          on the input field.</li>
+        <li>The event handler updates the value of email by calling the setEmail function with the new value obtained
+          from the event.</li>
+        <li>In JSX, we bind the value of the input field to the email state variable, and we set the onChange event
+          listener to the handleChange function.</li>
+        <li>It's a good practice to separate the logic of event handlers from JSX to improve readability, testability,
+          and maintainability.</li>
+        <img src="./assets/images/stateSetterLarge.jpg" alt="state setter large">
+        <li>We can simplify the event handler by directly passing the value from the event (e.g., event.target.value) to
+          the setEmail function.</li>
+        <img src="./assets/images/stateSetterMedium.jpg" alt="state setter medium">
+        <li>Object restructuring can be used to extract the target property from the event parameter, further
+          simplifying the code.</li>
+        <img src="./assets/images/stateSetterConcise.jpg" alt="state setter concise">
+        <li>All the variations of the event handler code snippets behave the same way, and the choice depends on
+          personal preference and code style.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Set From Previous State</h3>
+      <ul>
+        <li>React state updates are asynchronous, which means there can be scenarios where portions of your code run
+          before the state finishes updating.</li>
+        <li>To ensure that you are working with the most up-to-date state value, it is recommended to update state using
+          a callback function.</li>
+        <img src="./assets/images/setStateCallbackFunction.jpg" alt="state setter callback function">
+        <li>The callback function is passed as an argument to the state setter function (e.g., setCount) instead of
+          passing a new value directly.</li>
+        <li>By using the callback function approach, you can access the previous state value and compute the next state
+          based on it.</li>
+        <li>In the example code, the increment event handler is called when a button is clicked. Inside this function,
+          the state is updated using setCount with a callback function.</li>
+        <li>The callback function takes the previous count value as an argument (prevCount), and the value returned from
+          the callback is used as the next state value.</li>
+        <li>By using the callback function (prevCount => prevCount + 1), we increment the count value by 1 based on the
+          previous count value.</li>
+        <li>While it would work in this example to directly call setCount(count + 1), using the callback approach is
+          considered safer in certain scenarios.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Arrays in State</h3>
+      <ul>
+        <li>JavaScript arrays are a suitable data model for managing and rendering lists of JSX elements.</li>
+        <img src="./assets/images/arraysInState.jpg" alt="arrays in state">
+        <li>In the given example, there are two arrays:</li>
+        <li>The options array contains the names of pizza toppings available. It is defined outside the component as
+          static data.</li>
+        <li>The selected array represents the currently selected toppings for a personal pizza. It is managed within the
+          component's state using the useState hook.</li>
+        <li>The options array remains static and does not change. It is defined outside the function component to
+          prevent unnecessary re-creation on each component re-render.</li>
+        <li>The .map() method is used on the options array to render a button for each topping in the JSX.</li>
+        <li>The selected array is initialized as an empty array in the component's state.</li>
+        <li>When a button is clicked, the toggleTopping() event handler is called. It retrieves the clicked topping from
+          the event object.</li>
+        <li>When updating an array in state, it is important to replace the previous array with a new array rather than
+          adding new data to the existing array.</li>
+        <li>The spread syntax (...prev) is used to create a new array that includes all the elements from the previous
+          array. This ensures that any information from the previous array is retained in the new array when updating
+          the state.</li>
+        <li>The toggleTopping() function checks if the clicked topping is already selected. If it is, the topping is
+          filtered out of the state array. If it is not selected, the topping is added to the state array using the
+          spread syntax along with the previous elements.</li>
+        <li>The JSX renders a button for each topping, with the button label changing based on whether the topping is
+          selected or not.</li>
+        <li>The selected toppings are displayed in a 'p' element using the selected.join(', ') method to format the
+          array as a comma-separated string.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Objects in State</h3>
+      <ul>
+        <li>State can also be used with objects in React.</li>
+        <li>Grouping related variables into an object can be helpful.</li>
+        <img src="./assets/images/objectsInState.jpg" alt="objects in state">
+        <li>Use the useState hook to initialize the state object (formState) with an empty object {}.</li>
+        <li>Create an event handler function (handleChange) to update the state based on user input.</li>
+        <li>Destructure the name and value properties from the target object within the event handler.</li>
+        <li>Update the state using the state setter function with a callback: setFormState((prev) => ({ ...prev, [name]:
+          value })).</li>
+        <li>The spread syntax (...prev) copies the previous state object and then updates the specific key-value pair
+          with [name]: value.</li>
+        <li>Reuse the event handler for multiple input fields by using the name attribute of the input tag to identify
+          the input triggering the change event.</li>
+        <li>When the input values are updated, the handleChange function is called.</li>
+        <li>Wrap the new state object in parentheses when using the state setter callback: setFormState((prev) => ({
+          ...prev })).</li>
+        <li>The square brackets around name enable using the string value stored in the name variable as a property key.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Seperate Hooks for Seperate States</h3>
+      <ul>
+        <li>While it can be helpful to store related data in a data collection (like an array or object), it's also
+          beneficial to create separate state variables for data that change independently.</li>
+        <img src="./assets/images/singleObjectState.jpg" alt="single state object">
+        <li>Managing dynamic data becomes easier when keeping the data models as simple as possible.</li>
+        <li>Unlike this:</li>
+        <img src="./assets/images/singleObjectStateUpdate.jpg" alt="single object state update">
+        <li>Instead of using a single object to hold all related state, create multiple state variables based on the
+          values that tend to change together.</li>
+        <li>Separate state variables make the code simpler, easier to read, test, and reuse across components.</li>
+        <img src="./assets/images/multipleStates.jpg" alt="multiple states">
+        <li>Rewriting the example: Create individual state variables for currentGrade, classmates, classDetails, and
+          exams.</li>
+        <li>Each state variable can have its own state setter function, making it straightforward to update specific
+          values without the need for complex code.</li>
+        <li>Organizing data in separate state variables allows for more flexibility in managing and organizing dynamic
+          data within components.</li>
+        <li>Hooks provide the freedom to choose the most suitable data organization approach based on the specific needs
+          of the application.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Review: State Hooks</h3>
+      <ul>
+        <li>With React, we feed static and dynamic data models to JSX to render a view to the screen.</li>
+        <li>Hooks are used to “hook into” the internal component state for managing dynamic data in function components.
+        </li>
+        <li>We employ the State Hook using the code below. The currentState references the current value of the state
+          and initialState initializes the value of the state for the component’s first render.</li>
+        <img src="./assets/images/stateHook.jpg" alt="state hook">
+        <li>State setters can be called in event handlers.</li>
+        <li>We can define simple event handlers inline in our JSX and complex event handlers outside of our JSX.</li>
+        <li>We use a state setter callback function when our next value depends on our previous value.</li>
+        <li>We use arrays and objects to organize and manage related data that tend to change together.</li>
+        <li>Use the spread syntax on collections of dynamic data to copy the previous state into the next state like so:
+          setArrayState((prev) => [ ...prev ]) and setObjectState((prev) => ({ ...prev })).</li>
+        <li>It’s best practice to have multiple, simpler states instead of having one complex state object.</li>
+      </ul>
+    </section>
 
     <section>
       <h3></h3>
