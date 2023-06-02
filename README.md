@@ -1,6 +1,6 @@
 <h1 align="center">My Notes - Codecademy Learn React: Hooks | NickOD.xyz</h1>
 
-![Certificate of Completion]()
+![Certificate of Completion](./assets/images/Codecademy%20-%20Learn%20React%20Hooks.jpg)
 
 <br>
 
@@ -14,9 +14,15 @@ This is a collection of all my notes taken whilst going through the Codecademy c
 
 ## Link to Live Site of Notes
 
-[My Notes]()
+[My Notes](https://nick-odonoghue.github.io/codecademy-learn-react-hooks/)
 
 <br>
+
+## Sticking Points & What I learned
+
+useState & useEffect
+
+- tbh I wasn't 100% happy with how this course tried to teach the subject. Despite going back over the course and creating my notes I still feel I have a lot to learn. So I will look for guides elsewhere to help cement logic and missing pieces together.
 
 ## Author
 
@@ -27,7 +33,7 @@ This is a collection of all my notes taken whilst going through the Codecademy c
 
 ## Useful Resources
 
-...
+[Codecademy - React Hooks Cheatsheet](https://www.codecademy.com/learn/learn-react-hooks/modules/learn-react-hooks/cheatsheet)
 
 <br>
 
