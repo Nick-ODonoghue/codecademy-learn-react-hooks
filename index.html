@@ -245,19 +245,153 @@
       </ul>
     </section>
 
+    <h2>The Fetch Hook</h2>
+
     <section>
-      <h3></h3>
+      <h3>Function Component Effects</h3>
       <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li>The Effect Hook (useEffect()) allows us to perform actions every time a component is rendered or
+          re-rendered.</li>
+        <li>By combining the Effect Hook with states, we can create dynamic changes in our web pages.</li>
+        <img src="./assets/images/importEffectHook.jpg" alt="importing useEffect">
+        <li>To use the Effect Hook, import it from the 'react' library: import { useEffect } from 'react';</li>
+        <li>The useEffect() function takes a callback function (effect) as its argument, which runs after the component
+          renders.</li>
+        <img src="./assets/images/useEffectExample.jpg" alt="useEffect example">
+        <li>In the example, the effect changes the document title based on the value of the 'name' state.</li>
+        <li>The effect runs after each render of the component.</li>
+        <li>The onChange event listener triggers re-rendering of the component when the user types in the input field,
+          which in turn triggers the effect.</li>
+        <li>Access to the current state is available inside the effect, even though it runs after the component renders.
+        </li>
+        <li>React renders the component, updates the DOM, and then runs the effect after the DOM update.</li>
+        <li>This process occurs for every render, including the first and last render.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Clean up Effects</h3>
+      <ul>
+        <li>Some effects require cleanup to avoid memory leaks and performance issues.</li>
+        <li>When adding event listeners or other interactions with the DOM, it's important to remove them when no longer
+          needed.</li>
+        <img src="./assets/images/cleanUpEffectHook.jpg" alt="clean up effect">
+        <li>To clean up an effect, return a cleanup function from the useEffect() Hook.</li>
+        <li>The cleanup function is called before each re-render or unmounting of the component.</li>
+        <li>By returning a cleanup function, we ensure that any resources associated with the effect are properly
+          cleaned up.</li>
+        <li>In the example, the cleanup function removes the event listener added in the effect by using
+          document.removeEventListener().</li>
+        <li>It is our responsibility to include a cleanup function when our effect code could create memory leaks or
+          unnecessary performance overhead.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Control when Effects are Called</h3>
+      <ul>
+        <li>The useEffect() function calls its first argument (the effect) after each time a component renders.</li>
+        <li>We can control when the effect is called by using the second argument, known as the dependency array.</li>
+        <li>If we want the effect to be called only after the first render and not on re-renders, we pass an empty array
+          [] as the dependency array.</li>
+        <li>Passing an empty array [] as the dependency array ensures that the effect is called only once, when the
+          component mounts.</li>
+        <li>If a cleanup function is returned from the effect, it will be called when the component unmounts, regardless
+          of the dependency array.</li>
+        <li>The dependency array is used to specify dependencies that, when changed, will trigger the effect to be
+          called again.</li>
+        <li>By carefully choosing the dependencies in the array, we can control when the effect is called based on
+          specific changes in our component's state or props.</li>
+        <img src="./assets/images/useEffectDependencyArray.jpg" alt="effect with dependency array">
+        <li>In the example, the effect displays an alert when the component mounts and the cleanup function displays an
+          alert when the component unmounts.</li>
+        <li>By passing an empty array as the second argument to useEffect(), we ensure that the alerts are shown only
+          once, on mount and unmount.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Fetch Data</h3>
+      <ul>
+        <li>When fetching data from a server, it's important to control when the effect is called to avoid unnecessary
+          round trips.</li>
+        <li>Unnecessary fetches can impact processing, performance, data usage, and API service fees.</li>
+        <li>By using the dependency array in useEffect(), we can configure exactly when the effect should be called.
+        </li>
+        <li>An empty dependency array [] indicates that the effect should be called only after the first render and
+          never re-run.</li>
+        <li>When the response is received, we can store the data in local component state using a state setter from the
+          State Hook.</li>
+        <li>This pattern of using the State Hook and the Effect Hook together allows components to avoid unnecessary
+          data fetches after every render.</li>
+        <li>An empty dependency array signals that the effect doesn't depend on anything and doesn't need to be re-run.
+        </li>
+        <li>A non-empty dependency array tells the Effect Hook to skip calling the effect after re-renders unless one of
+          the dependencies has changed.</li>
+        <img src="./assets/images/fetchData.jpg" alt="fetch data example">
+        <li>In the example, the effect sets the document title based on the value of the "count" variable, and it will
+          be re-run only if the value of "count" changes.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Rules of Hooks</h3>
+      <ul>
+        <li>Rule 1: Only call Hooks at the top level. Avoid calling hooks inside loops, conditions, or nested functions.
+        </li>
+        <li>Hooks should be called consistently and not conditionally based on certain conditions.</li>
+        <img src="./assets/images/incorrectHookUse.jpg" alt="incorrect use of hook inside a conditional">
+        <li>Instead of conditionally calling useEffect() inside an if statement, call it at the top level and put the
+          condition inside the effect.</li>
+        <img src="./assets/images/correctHookUse.jpg" alt="correct use of conditional with a hook">
+        <li>Rule 2: Only call Hooks from React functions. Hooks can be used in function components and custom hooks.
+        </li>
+        <li>Custom hooks are functions that use Hooks and can be used to organize and reuse stateful logic between
+          function components.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Separate Hooks for Separate Effects</h3>
+      <ul>
+        <li>When multiple closely related values change together, it can be useful to group them in a collection like an
+          object or array.</li>
+        <li>Bundling data together in a single object can add complexity to the code responsible for managing that data.
+        </li>
+        <li>To separate concerns and manage different data with different Hooks, it is recommended to use separate Hooks
+          for separate effects.</li>
+        <img src="./assets/images/nonSeperateHooks.jpg" alt="non seperated hooks">
+        <li>In the example provided, the first code snippet bundles the position and menuItems data in a single object
+          using one useEffect hook.</li>
+        <img src="./assets/images/seperateHooks.jpg" alt="seperate hooks">
+        <li>The second code snippet demonstrates a simpler approach where concerns are separated:</li>
+        <li>menuItems is managed using one useEffect hook with its own state variable and update function.</li>
+        <li>position is managed using a separate useEffect hook with its own state variable and update function.</li>
+        <li>It may not always be obvious whether to bundle data together or separate it, but with practice, we can
+          improve the organization of our code for better understanding, maintainability, reusability, and testing.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Review: Effect Hook</h3>
+      <ul>
+        <li>We can import the useEffect() function from the 'react' library and call it in our function components.</li>
+        <li>Effect refers to a function that we pass as the first argument of the useEffect() function. By default, the
+          Effect Hook calls this effect after each render.</li>
+        <li>The cleanup function is optionally returned by the effect. If the effect does anything that needs to be
+          cleaned up to prevent memory leaks, then the effect returns a cleanup function, then the Effect Hook will call
+          this cleanup function before calling the effect again as well as when the component is being unmounted.</li>
+        <li>The dependency array is the optional second argument that the useEffect() function can be called with in
+          order to prevent repeatedly calling the effect when this is not needed. This array should consist of all
+          variables that the effect depends on. </li>
+        <li>The Effect Hook is all about scheduling when our effect’s code gets executed. We can use the dependency
+          array to configure when our effect is called in the following ways:</li>
+        <li>Dependency Array: undefined, Effect called after first render & … every re-render</li>
+        <li>Dependency Array: Empty array, Effect called after first render & … no re-renders</li>
+        <li>Dependency Array: Non-empty array, Effect called after first render & … when any value in the dependency
+          array changes</li>
+        <li>Hooks gives us the flexibility to organize our code in different ways, grouping related data as well as
+          separating concerns to keep code simple, error-free, reusable, and testable!</li>
       </ul>
     </section>
 
